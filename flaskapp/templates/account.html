@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}{{title}} {% endblock %}
+{% block body %}
+<div class="home">
+    <a class="nav-link" href="{{ url_for('home') }}">Home </span></a>
+</div>
+<img src="{{ image_file }}">
+<h2>{{ current_user.username }}</h2>
+<h2>{{ current_user.email }}</h2>
+
+
+<form method="post">
+    {{ form.hidden_tag() }}
+    <legend>Update Account Form</legend>
+    <fieldset>
+    <div class="form_group">
+        {{form.username.label}}
+        {% if form.username.errors %}
+        {{form.username}}
+            {% for error in form.username.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+
+        {% else %}
+            {{form.username}}
+        {% endif %}
+        
+    </div>
+    <div class="form_group">
+        {{form.email.label}}
+        {% if form.email.errors %}
+        {{form.email}}
+            {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+
+        {% else %}
+            {{form.email}}
+        {% endif %}
+    </div>
+    
+    <div class="form_group">
+        {{form.submit}}
+        
+    </div>
+    {% with messages = get_flashed_messages() %}
+{% if messages %}
+    
+    {% for message in messages %}
+        <p class="alert">{{ message }}<p>
+    {% endfor %}
+    
+{% endif %}
+{% endwith %}
+
+    
+
+{% endblock %}

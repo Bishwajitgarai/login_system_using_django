@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}{{title}} {% endblock %}
+{% block body %}
+<a class="nav-link" href="{{ url_for('home') }}">Home </span></a>
+
+<form method="post">
+    {{ form.hidden_tag() }}
+    <legend>Pst Details</legend>
+    <fieldset>
+
+        <div class="form_group">
+            {{form.postname.label}}
+            {% if form.postname.errors %}
+            {{form.postname}}
+                {% for error in form.postname.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+
+            {% else %}
+                {{form.postname}}
+            {% endif %}
+        </div>
+        <div class="form_group">
+            {{form.postdata.label}}
+            {% if form.postdata.errors %}
+            {{form.postdata}}
+                {% for error in form.postdata.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+
+            {% else %}
+                {{form.postdata}}
+            {% endif %}
+        </div>
+        <div class="form_group">
+            {{form.submit}}
+        </div>
+    </fieldset>
+   
+</form>
+
+{% endblock %}
